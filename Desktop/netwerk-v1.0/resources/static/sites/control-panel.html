@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Netwerk Control Panel</title>
+    <link rel="stylesheet" href="/resources/static/css/admin.css">
+</head>
+<body>
+    <main class="admin-app">
+        <header class="admin-header">
+            <a class="admin-brand" href="/interface"><span>N</span> Netwerk <b>Control Panel</b></a>
+            <div class="admin-header-actions">
+                <span class="admin-identity">Administrator: koutroufinis</span>
+                <a class="header-link" href="/interface">Back to chat</a>
+                <button class="header-link" id="refreshButton" type="button">Refresh data</button>
+            </div>
+        </header>
+
+        <div class="admin-content">
+            <div class="page-heading">
+                <div>
+                    <p class="eyebrow">ADMINISTRATION</p>
+                    <h1>Control panel</h1>
+                    <p class="subheading">Manage bans, review conversations, and inspect the app's JSON data.</p>
+                </div>
+                <p id="lastUpdated" class="last-updated"></p>
+            </div>
+
+            <p id="adminNotice" class="admin-notice" role="status" aria-live="polite" hidden></p>
+
+            <section class="stats" aria-label="Data summary">
+                <article class="stat-card"><span>Users</span><strong id="userCount">—</strong></article>
+                <article class="stat-card"><span>Messages</span><strong id="messageCount">—</strong></article>
+                <article class="stat-card"><span>Login records</span><strong id="loginCount">—</strong></article>
+                <article class="stat-card"><span>Active bans</span><strong id="banCount">—</strong></article>
+            </section>
+
+            <div class="admin-grid">
+                <section class="panel users-panel">
+                    <div class="panel-heading">
+                        <div><p class="eyebrow">ACCOUNTS</p><h2>Users</h2></div>
+                        <input id="userSearch" type="search" placeholder="Search users" aria-label="Search users">
+                    </div>
+                    <div id="userList" class="user-list" aria-live="polite">
+                        <p class="muted">Loading users…</p>
+                    </div>
+                </section>
+
+                <section class="panel conversations-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <p class="eyebrow">DIRECT MESSAGES</p>
+                            <h2 id="conversationTitle">Select a user</h2>
+                        </div>
+                    </div>
+                    <div id="conversationList" class="conversation-list" aria-live="polite">
+                        <p class="muted">Choose a user to inspect their conversations.</p>
+                    </div>
+                </section>
+            </div>
+
+            <div class="admin-grid lower-grid">
+                <section class="panel bans-panel">
+                    <div class="panel-heading">
+                        <div><p class="eyebrow">MODERATION</p><h2>Ban management</h2></div>
+                    </div>
+                    <form id="banForm" class="ban-form">
+                        <label for="banKind">Ban type</label>
+                        <select id="banKind">
+                            <option value="username">Username</option>
+                            <option value="ip_address">IP address</option>
+                        </select>
+                        <label for="banValue">Username or IP address</label>
+                        <input id="banValue" type="text" maxlength="100" required>
+                        <label for="banReason">Reason <span>(optional)</span></label>
+                        <input id="banReason" type="text" maxlength="200" placeholder="Up to 200 characters">
+                        <button class="danger-button" id="banSubmit" type="submit">Apply ban</button>
+                    </form>
+                    <div id="banList" class="ban-list" aria-live="polite"></div>
+                </section>
+
+                <section class="panel json-panel">
+                    <div class="panel-heading json-heading">
+                        <div><p class="eyebrow">STORED DATA</p><h2>JSON files</h2></div>
+                        <label class="json-select-label" for="jsonSelect">File</label>
+                        <select id="jsonSelect">
+                            <option value="users">users.json</option>
+                            <option value="messages">messages.json</option>
+                            <option value="login_history">login_history.json</option>
+                            <option value="banned">banned.json</option>
+                        </select>
+                    </div>
+                    <pre id="jsonContents" class="json-contents">Loading…</pre>
+                    <p class="json-footnote">Sensitive account data is visible only to the authorized administrator.</p>
+                </section>
+            </div>
+        </div>
+    </main>
+    <script src="/resources/static/js/admin.js"></script>
+</body>
+</html>

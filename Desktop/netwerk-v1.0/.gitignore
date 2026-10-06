@@ -1,0 +1,6 @@
+database/.env
+database/sql/*.db
+database/json/*.json
+database/json/*.tmp
+__pycache__/
+.venv/
